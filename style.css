@@ -1,11 +1,20 @@
-body
+.content
 {
     width:600px;
     padding:10px;
 }
-p
+.content p
 {
     font-size:20px;
     line-height:140%;
+}
+.option
+{
+    width:300px;
+    padding:10px;
+    text-align:right;
+    position:fixed;
+    top:50px;
+    left:600px;
 }
 
