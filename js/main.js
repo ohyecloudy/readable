@@ -24330,15 +24330,16 @@ dommy.core.fire_BANG_ = function() {
 }();
 goog.provide("readable.core");
 goog.require("cljs.core");
+goog.require("clojure.string");
 goog.require("dommy.core");
 goog.require("dommy.utils");
 readable.core.content_elem = dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0];
-readable.core.set_style_BANG_ = function set_style_BANG_(p__18900) {
-  var map__18902 = p__18900;
-  var map__18902__$1 = cljs.core.seq_QMARK_.call(null, map__18902) ? cljs.core.apply.call(null, cljs.core.hash_map, map__18902) : map__18902;
-  var ff = cljs.core.get.call(null, map__18902__$1, "\ufdd0:ff");
-  var fs = cljs.core.get.call(null, map__18902__$1, "\ufdd0:fs");
-  var lh = cljs.core.get.call(null, map__18902__$1, "\ufdd0:lh");
+readable.core.set_style_BANG_ = function set_style_BANG_(p__50039) {
+  var map__50041 = p__50039;
+  var map__50041__$1 = cljs.core.seq_QMARK_.call(null, map__50041) ? cljs.core.apply.call(null, cljs.core.hash_map, map__50041) : map__50041;
+  var ff = cljs.core.get.call(null, map__50041__$1, "\ufdd0:ff");
+  var fs = cljs.core.get.call(null, map__50041__$1, "\ufdd0:fs");
+  var lh = cljs.core.get.call(null, map__50041__$1, "\ufdd0:lh");
   var s_BANG_ = function s_BANG_(t, v) {
     if(!(v == null)) {
       return dommy.core.set_style_BANG_.call(null, readable.core.content_elem, t, v)
@@ -24365,7 +24366,7 @@ dommy.core.listen_BANG_.call(null, document.getElementById("font-size"), "\ufdd0
 dommy.core.listen_BANG_.call(null, document.getElementById("line-height"), "\ufdd0:change", function() {
   return readable.core.set_style_BANG_.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:lh", dommy.core.value.call(null, document.getElementById("line-height"))], true))
 });
-window.onload = function() {
+readable.core.sync_style_input_box = function sync_style_input_box() {
   var s = readable.core.style.call(null);
   var set_input_box_BANG_ = function(s) {
     return function(k, v) {
@@ -24375,4 +24376,18 @@ window.onload = function() {
   set_input_box_BANG_.call(null, "\ufdd0:#font-family", s.call(null, "\ufdd0:ff"));
   set_input_box_BANG_.call(null, "\ufdd0:#font-size", s.call(null, "\ufdd0:fs"));
   return set_input_box_BANG_.call(null, "\ufdd0:#line-height", s.call(null, "\ufdd0:lh"))
+};
+readable.core.parse_query_string = function parse_query_string(s) {
+  var params = clojure.string.split.call(null, cljs.core.last.call(null, clojure.string.split.call(null, s, /\?/)), /\&/);
+  return cljs.core.apply.call(null, cljs.core.conj, cljs.core.map.call(null, function(x) {
+    var kv = clojure.string.split.call(null, x, /=/);
+    return cljs.core.PersistentArrayMap.fromArray([cljs.core.keyword.call(null, cljs.core.first.call(null, kv)), cljs.core.last.call(null, kv)], true)
+  }, params))
+};
+readable.core.sync_query_string_style = function sync_query_string_style(s) {
+  return readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s))
+};
+window.onload = function() {
+  readable.core.sync_query_string_style.call(null, location);
+  return readable.core.sync_style_input_box.call(null)
 };
