@@ -24332,12 +24332,47 @@ goog.provide("readable.core");
 goog.require("cljs.core");
 goog.require("dommy.core");
 goog.require("dommy.utils");
+readable.core.content_elem = dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0];
+readable.core.set_style_BANG_ = function set_style_BANG_(p__18900) {
+  var map__18902 = p__18900;
+  var map__18902__$1 = cljs.core.seq_QMARK_.call(null, map__18902) ? cljs.core.apply.call(null, cljs.core.hash_map, map__18902) : map__18902;
+  var ff = cljs.core.get.call(null, map__18902__$1, "\ufdd0:ff");
+  var fs = cljs.core.get.call(null, map__18902__$1, "\ufdd0:fs");
+  var lh = cljs.core.get.call(null, map__18902__$1, "\ufdd0:lh");
+  var s_BANG_ = function s_BANG_(t, v) {
+    if(!(v == null)) {
+      return dommy.core.set_style_BANG_.call(null, readable.core.content_elem, t, v)
+    }else {
+      return null
+    }
+  };
+  s_BANG_.call(null, "\ufdd0:font-family", ff);
+  s_BANG_.call(null, "\ufdd0:font-size", fs);
+  return s_BANG_.call(null, "\ufdd0:line-height", lh)
+};
+readable.core.style = function style() {
+  var s = function s(k) {
+    return dommy.core.style.call(null, readable.core.content_elem, k)
+  };
+  return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:ff", s.call(null, "\ufdd0:font-family"), "\ufdd0:fs", s.call(null, "\ufdd0:font-size"), "\ufdd0:lh", s.call(null, "\ufdd0:line-height")], true)
+};
 dommy.core.listen_BANG_.call(null, document.getElementById("font-family"), "\ufdd0:change", function() {
-  return dommy.core.set_style_BANG_.call(null, dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0], "\ufdd0:font-family", dommy.core.value.call(null, document.getElementById("font-family")))
+  return readable.core.set_style_BANG_.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:ff", dommy.core.value.call(null, document.getElementById("font-family"))], true))
 });
 dommy.core.listen_BANG_.call(null, document.getElementById("font-size"), "\ufdd0:change", function() {
-  return dommy.core.set_style_BANG_.call(null, dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0], "\ufdd0:font-size", dommy.core.value.call(null, document.getElementById("font-size")))
+  return readable.core.set_style_BANG_.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:fs", dommy.core.value.call(null, document.getElementById("font-size"))], true))
 });
 dommy.core.listen_BANG_.call(null, document.getElementById("line-height"), "\ufdd0:change", function() {
-  return dommy.core.set_style_BANG_.call(null, dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0], "\ufdd0:line-height", dommy.core.value.call(null, document.getElementById("line-height")))
+  return readable.core.set_style_BANG_.call(null, cljs.core.PersistentArrayMap.fromArray(["\ufdd0:lh", dommy.core.value.call(null, document.getElementById("line-height"))], true))
 });
+window.onload = function() {
+  var s = readable.core.style.call(null);
+  var set_input_box_BANG_ = function(s) {
+    return function(k, v) {
+      return dommy.core.set_value_BANG_.call(null, document.querySelector(dommy.core.selector.call(null, k)), v)
+    }
+  }(s);
+  set_input_box_BANG_.call(null, "\ufdd0:#font-family", s.call(null, "\ufdd0:ff"));
+  set_input_box_BANG_.call(null, "\ufdd0:#font-size", s.call(null, "\ufdd0:fs"));
+  return set_input_box_BANG_.call(null, "\ufdd0:#line-height", s.call(null, "\ufdd0:lh"))
+};
