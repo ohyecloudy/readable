@@ -24334,12 +24334,12 @@ goog.require("clojure.string");
 goog.require("dommy.core");
 goog.require("dommy.utils");
 readable.core.content_elem = dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0];
-readable.core.set_style_BANG_ = function set_style_BANG_(p__50039) {
-  var map__50041 = p__50039;
-  var map__50041__$1 = cljs.core.seq_QMARK_.call(null, map__50041) ? cljs.core.apply.call(null, cljs.core.hash_map, map__50041) : map__50041;
-  var ff = cljs.core.get.call(null, map__50041__$1, "\ufdd0:ff");
-  var fs = cljs.core.get.call(null, map__50041__$1, "\ufdd0:fs");
-  var lh = cljs.core.get.call(null, map__50041__$1, "\ufdd0:lh");
+readable.core.set_style_BANG_ = function set_style_BANG_(p__4449) {
+  var map__4451 = p__4449;
+  var map__4451__$1 = cljs.core.seq_QMARK_.call(null, map__4451) ? cljs.core.apply.call(null, cljs.core.hash_map, map__4451) : map__4451;
+  var ff = cljs.core.get.call(null, map__4451__$1, "\ufdd0:ff");
+  var fs = cljs.core.get.call(null, map__4451__$1, "\ufdd0:fs");
+  var lh = cljs.core.get.call(null, map__4451__$1, "\ufdd0:lh");
   var s_BANG_ = function s_BANG_(t, v) {
     if(!(v == null)) {
       return dommy.core.set_style_BANG_.call(null, readable.core.content_elem, t, v)
@@ -24384,10 +24384,10 @@ readable.core.parse_query_string = function parse_query_string(s) {
     return cljs.core.PersistentArrayMap.fromArray([cljs.core.keyword.call(null, cljs.core.first.call(null, kv)), cljs.core.last.call(null, kv)], true)
   }, params))
 };
-readable.core.sync_query_string_style = function sync_query_string_style(s) {
-  return readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s))
+readable.core.applyqs = function applyqs(s) {
+  readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s));
+  return readable.core.sync_style_input_box.call(null)
 };
 window.onload = function() {
-  readable.core.sync_query_string_style.call(null, location);
-  return readable.core.sync_style_input_box.call(null)
+  return readable.core.applyqs.call(null, location)
 };

@@ -14,4 +14,12 @@
     top:50px;
     left:600px;
 }
-
+.preset
+{
+    width:300px;
+    padding:10px;
+    text-align:right;
+    position:fixed;
+    top:200px;
+    left:600px;
+}

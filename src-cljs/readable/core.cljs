@@ -57,11 +57,11 @@
                     {(keyword (first kv)) (last kv)}))
                 params))))
 
-(defn sync-query-string-style [s]
-  (set-style! (parse-query-string s)))
+(defn applyqs [s]
+  (do
+    (set-style! (parse-query-string s))
+    (sync-style-input-box)))
 
 (set! (.-onload js/window)
       (fn []
-        (do
-          (sync-query-string-style js/location)
-          (sync-style-input-box))))
+        (applyqs js/location)))
