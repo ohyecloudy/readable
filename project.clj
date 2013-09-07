@@ -1,5 +1,5 @@
 (defproject readable "0.1.0-SNAPSHOT"
-  :description "가독성 테스트 웹페이지"
+  :description "test page readability"
   :url "https://github.com/ohyecloudy/readable"
   :license {:name "The MIT License (MIT)"
             :url "http://opensource.org/licenses/MIT"}
