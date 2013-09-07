@@ -24334,12 +24334,12 @@ goog.require("clojure.string");
 goog.require("dommy.core");
 goog.require("dommy.utils");
 readable.core.content_elem = dommy.utils.__GT_Array.call(null, document.getElementsByClassName("content"))[0];
-readable.core.set_style_BANG_ = function set_style_BANG_(p__4449) {
-  var map__4451 = p__4449;
-  var map__4451__$1 = cljs.core.seq_QMARK_.call(null, map__4451) ? cljs.core.apply.call(null, cljs.core.hash_map, map__4451) : map__4451;
-  var ff = cljs.core.get.call(null, map__4451__$1, "\ufdd0:ff");
-  var fs = cljs.core.get.call(null, map__4451__$1, "\ufdd0:fs");
-  var lh = cljs.core.get.call(null, map__4451__$1, "\ufdd0:lh");
+readable.core.set_style_BANG_ = function set_style_BANG_(p__3893) {
+  var map__3895 = p__3893;
+  var map__3895__$1 = cljs.core.seq_QMARK_.call(null, map__3895) ? cljs.core.apply.call(null, cljs.core.hash_map, map__3895) : map__3895;
+  var ff = cljs.core.get.call(null, map__3895__$1, "\ufdd0:ff");
+  var fs = cljs.core.get.call(null, map__3895__$1, "\ufdd0:fs");
+  var lh = cljs.core.get.call(null, map__3895__$1, "\ufdd0:lh");
   var s_BANG_ = function s_BANG_(t, v) {
     if(!(v == null)) {
       return dommy.core.set_style_BANG_.call(null, readable.core.content_elem, t, v)
@@ -24349,7 +24349,8 @@ readable.core.set_style_BANG_ = function set_style_BANG_(p__4449) {
   };
   s_BANG_.call(null, "\ufdd0:font-family", ff);
   s_BANG_.call(null, "\ufdd0:font-size", fs);
-  return s_BANG_.call(null, "\ufdd0:line-height", lh)
+  s_BANG_.call(null, "\ufdd0:line-height", lh);
+  return readable.core.update_permalink_box.call(null)
 };
 readable.core.style = function style() {
   var s = function s(k) {
@@ -24383,6 +24384,23 @@ readable.core.parse_query_string = function parse_query_string(s) {
     var kv = clojure.string.split.call(null, x, /=/);
     return cljs.core.PersistentArrayMap.fromArray([cljs.core.keyword.call(null, cljs.core.first.call(null, kv)), cljs.core.last.call(null, kv)], true)
   }, params))
+};
+readable.core.make_query_string = function make_query_string(m) {
+  var make_field_value_pair = function make_field_value_pair(elem) {
+    return[cljs.core.str(cljs.core.name.call(null, cljs.core.first.call(null, elem))), cljs.core.str("="), cljs.core.str(cljs.core.last.call(null, elem))].join("")
+  };
+  return cljs.core.reduce.call(null, function(a, b) {
+    return[cljs.core.str(a), cljs.core.str("&"), cljs.core.str(b)].join("")
+  }, cljs.core.map.call(null, make_field_value_pair, m))
+};
+readable.core.make_url = function make_url(path, query_string) {
+  return[cljs.core.str(cljs.core.first.call(null, clojure.string.split.call(null, path, /\?/))), cljs.core.str(!(query_string == null) ? [cljs.core.str("?"), cljs.core.str(query_string)].join("") : null)].join("")
+};
+readable.core.make_permalink = function make_permalink() {
+  return readable.core.make_url.call(null, location, readable.core.make_query_string.call(null, readable.core.style.call(null)))
+};
+readable.core.update_permalink_box = function update_permalink_box() {
+  return dommy.core.set_value_BANG_.call(null, document.getElementById("permalink"), readable.core.make_permalink.call(null))
 };
 readable.core.applyqs = function applyqs(s) {
   readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s));

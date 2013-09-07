@@ -23,3 +23,12 @@
     top:200px;
     left:600px;
 }
+.share
+{
+    width:300px;
+    padding:10px;
+    text-align:right;
+    position:fixed;
+    top:400px;
+    left:600px;
+}

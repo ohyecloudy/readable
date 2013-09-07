@@ -13,7 +13,8 @@
     (do
       (s! :font-family ff)
       (s! :font-size fs)
-      (s! :line-height lh))))
+      (s! :line-height lh)
+      (update-permalink-box))))
 
 (defn style []
   (letfn [(s [k] (dommy/style content-elem k))]
@@ -56,6 +57,27 @@
                   (let [kv (str/split x #"=")]
                     {(keyword (first kv)) (last kv)}))
                 params))))
+
+(defn make-query-string
+  "{:a \"b\" :c \"d\"} 맵에서 a=b&c=d query string을 만든다"
+  [m]
+  (letfn [(make-field-value-pair [elem]
+            (str (name (first elem)) "=" (last elem)))]
+    (reduce (fn [a b] (str a "&" b))
+            (map make-field-value-pair m))))
+
+(defn make-url [path query-string]
+  (str (first (str/split path #"\?"))
+       (when (not (nil? query-string))
+         (str "?" query-string))))
+
+(defn make-permalink []
+  (make-url js/location
+            (make-query-string (style))))
+
+(defn update-permalink-box []
+  (dommy/set-value! (sel1 :#permalink)
+                    (make-permalink)))
 
 (defn applyqs [s]
   (do
