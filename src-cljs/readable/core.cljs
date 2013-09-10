@@ -49,7 +49,8 @@
 (defn parse-query-string
   "path?a=b&c=d 에서 query string을 뽑아 {:a \"b\" :c \"d\"} 맵을 만든다"
   [s]
-  (let [params (-> (str/split s #"\?")
+  (let [params (-> (js/decodeURIComponent s)
+                   (str/split #"\?")
                    (last)
                    (str/split #"\&"))]
     (apply conj

@@ -24379,7 +24379,7 @@ readable.core.sync_style_input_box = function sync_style_input_box() {
   return set_input_box_BANG_.call(null, "\ufdd0:#line-height", s.call(null, "\ufdd0:lh"))
 };
 readable.core.parse_query_string = function parse_query_string(s) {
-  var params = clojure.string.split.call(null, cljs.core.last.call(null, clojure.string.split.call(null, s, /\?/)), /\&/);
+  var params = clojure.string.split.call(null, cljs.core.last.call(null, clojure.string.split.call(null, decodeURIComponent(s), /\?/)), /\&/);
   return cljs.core.apply.call(null, cljs.core.conj, cljs.core.map.call(null, function(x) {
     var kv = clojure.string.split.call(null, x, /=/);
     return cljs.core.PersistentArrayMap.fromArray([cljs.core.keyword.call(null, cljs.core.first.call(null, kv)), cljs.core.last.call(null, kv)], true)
