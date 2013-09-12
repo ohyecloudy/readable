@@ -24403,7 +24403,7 @@ readable.core.update_permalink_box = function update_permalink_box() {
   return dommy.core.set_value_BANG_.call(null, document.getElementById("permalink"), readable.core.make_permalink.call(null))
 };
 readable.core.make_tweet_url = function make_tweet_url() {
-  return[cljs.core.str("https://twitter.com/share?url="), cljs.core.str(encodeURIComponent(dommy.core.value.call(null, document.getElementById("permalink"))))].join("")
+  return dommy.core.value.call(null, document.getElementById("permalink"))
 };
 readable.core.applyqs = function applyqs(s) {
   readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s));
