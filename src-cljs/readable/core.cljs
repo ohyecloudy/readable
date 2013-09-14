@@ -81,7 +81,9 @@
                     (make-permalink)))
 
 (defn make-tweet-url []
-  (dommy/value (sel1 :#permalink)))
+  (str "https://twitter.com/share?url="
+       (js/encodeURIComponent
+        (dommy/value (sel1 :#permalink)))))
 
 (defn applyqs [s]
   (do
