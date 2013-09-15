@@ -24388,7 +24388,7 @@ readable.core.parse_query_string = function parse_query_string(s) {
 };
 readable.core.make_query_string = function make_query_string(m) {
   var make_field_value_pair = function make_field_value_pair(elem) {
-    return[cljs.core.str(cljs.core.name.call(null, cljs.core.first.call(null, elem))), cljs.core.str("="), cljs.core.str(cljs.core.last.call(null, elem))].join("")
+    return[cljs.core.str(cljs.core.name.call(null, cljs.core.first.call(null, elem))), cljs.core.str("="), cljs.core.str(encodeURIComponent(cljs.core.last.call(null, elem)))].join("")
   };
   return cljs.core.reduce.call(null, function(a, b) {
     return[cljs.core.str(a), cljs.core.str("&"), cljs.core.str(b)].join("")

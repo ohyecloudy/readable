@@ -64,7 +64,10 @@
   "{:a \"b\" :c \"d\"} 맵에서 a=b&c=d query string을 만든다"
   [m]
   (letfn [(make-field-value-pair [elem]
-            (str (name (first elem)) "=" (last elem)))]
+            (str
+             (name (first elem))
+             "="
+             (js/encodeURIComponent (last elem))))]
     (reduce (fn [a b] (str a "&" b))
             (map make-field-value-pair m))))
 
