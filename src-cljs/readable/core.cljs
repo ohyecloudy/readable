@@ -2,6 +2,7 @@
   (:use-macros [dommy.macros :only [sel1]])
   (:require [dommy.utils :as utils]
             [dommy.core :as dommy]
+            [dommy.attrs :as attrs]
             [clojure.string :as str]))
 
 (def content-elem (sel1 ".content"))
@@ -14,7 +15,7 @@
       (s! :font-family ff)
       (s! :font-size fs)
       (s! :line-height lh)
-      (update-permalink-box))))
+      (update-permalink))))
 
 (defn style []
   (letfn [(s [k] (dommy/style content-elem k))]
@@ -76,14 +77,28 @@
   (make-url js/location
             (make-query-string (style))))
 
-(defn update-permalink-box []
-  (dommy/set-value! (sel1 :#permalink)
-                    (make-permalink)))
+(defn update-permalink []
+  (let [perm (make-permalink)]
+    (do
+      (dommy/set-value! (sel1 :#permalink)
+                        perm)
+      (update-tweet-anchor-url
+       (make-tweet-url perm)))))
 
-(defn make-tweet-url []
+(defn make-tweet-url [perm]
   (str "https://twitter.com/share?url="
        (js/encodeURIComponent
-        (dommy/value (sel1 :#permalink)))))
+        perm)
+       "&via=ohyecloudy&hashtags=readable&lang=kr"))
+
+(defn update-tweet-anchor-url [url]
+  (attrs/set-attr!
+   (sel1
+    (sel1 :#tweet-button)
+    :a)
+   :href
+   url))
+
 
 (defn applyqs [s]
   (do
