@@ -24403,13 +24403,20 @@ readable.core.make_permalink = function make_permalink() {
 readable.core.update_permalink = function update_permalink() {
   var perm = readable.core.make_permalink.call(null);
   dommy.core.set_value_BANG_.call(null, document.getElementById("permalink"), perm);
-  return readable.core.update_tweet_anchor_url.call(null, readable.core.make_tweet_url.call(null, perm))
+  readable.core.update_tweet_anchor_url.call(null, readable.core.make_tweet_url.call(null, perm));
+  return readable.core.update_facebook_share_anchor_url.call(null, readable.core.make_facebook_share_url.call(null, perm))
 };
 readable.core.make_tweet_url = function make_tweet_url(perm) {
   return[cljs.core.str("https://twitter.com/share?url="), cljs.core.str(encodeURIComponent(perm)), cljs.core.str("&via=ohyecloudy&hashtags=readable&lang=kr")].join("")
 };
 readable.core.update_tweet_anchor_url = function update_tweet_anchor_url(url) {
   return dommy.attrs.set_attr_BANG_.call(null, dommy.utils.__GT_Array.call(null, dommy.template.__GT_node_like.call(null, document.getElementById("tweet-button")).getElementsByTagName("a"))[0], "\ufdd0:href", url)
+};
+readable.core.make_facebook_share_url = function make_facebook_share_url(perm) {
+  return[cljs.core.str("https://www.facebook.com/sharer/sharer.php?u="), cljs.core.str(encodeURIComponent(perm))].join("")
+};
+readable.core.update_facebook_share_anchor_url = function update_facebook_share_anchor_url(url) {
+  return dommy.attrs.set_attr_BANG_.call(null, dommy.utils.__GT_Array.call(null, dommy.template.__GT_node_like.call(null, document.getElementById("facebook-share-button")).getElementsByTagName("a"))[0], "\ufdd0:href", url)
 };
 readable.core.applyqs = function applyqs(s) {
   readable.core.set_style_BANG_.call(null, readable.core.parse_query_string.call(null, s));

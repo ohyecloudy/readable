@@ -86,7 +86,9 @@
       (dommy/set-value! (sel1 :#permalink)
                         perm)
       (update-tweet-anchor-url
-       (make-tweet-url perm)))))
+       (make-tweet-url perm))
+      (update-facebook-share-anchor-url
+       (make-facebook-share-url perm)))))
 
 (defn make-tweet-url [perm]
   (str "https://twitter.com/share?url="
@@ -102,6 +104,16 @@
    :href
    url))
 
+(defn make-facebook-share-url [perm]
+  (str "https://www.facebook.com/sharer/sharer.php?u="
+       (js/encodeURIComponent
+        perm)))
+
+(defn update-facebook-share-anchor-url [url]
+  (attrs/set-attr!
+   (sel1 (sel1 :#facebook-share-button) :a)
+   :href
+   url))
 
 (defn applyqs [s]
   (do
