@@ -1,34 +1,5 @@
 .content
 {
-    width:600px;
-    padding:10px;
     font-size:20px;
     line-height:140%;
-}
-.option
-{
-    width:300px;
-    padding:10px;
-    text-align:right;
-    position:fixed;
-    top:50px;
-    left:600px;
-}
-.preset
-{
-    width:300px;
-    padding:10px;
-    text-align:right;
-    position:fixed;
-    top:200px;
-    left:600px;
-}
-.share
-{
-    width:300px;
-    padding:10px;
-    text-align:right;
-    position:fixed;
-    top:400px;
-    left:600px;
 }
