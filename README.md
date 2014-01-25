@@ -22,7 +22,7 @@ index.html을 브라우저에서 엽니다.
 
 ## Read More About Readable
 
-* [Readable 프로젝트 개발 일기](http://ohyecloudy.github.io/ddiary/categories.html#readable-ref)
+* [Readable 프로젝트 개발 일기](http://ohyecloudy.com/ddiary/categories.html#readable-ref)
 * [가독성 그것이 문제로다. Readable 프로젝트를 마무리하고](http://ohyecloudy.com/pnotes/archives/1885)
 
 ## License
